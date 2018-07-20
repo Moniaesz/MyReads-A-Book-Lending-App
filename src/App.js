@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookList from './BookList'
+import SearchField from './SearchField'
 
 class App extends Component {
   constructor(props) {
@@ -14,14 +15,29 @@ class App extends Component {
 componentDidMount() {
   BooksAPI.getAll().then((books) => {
     this.setState({books: books})
-    console.log(this.state)
+  })
+}
+
+updateShelf = (book, evt) => {
+  BooksAPI.update(book, evt).then(() => {
+    book.shelf = evt
+    const currentBooks = this.state.books.filter ( b => b.id !== book.id)
+    console.log(currentBooks);
+    currentBooks.push(book)
+    this.setState({
+      books: currentBooks
+    })
   })
 }
 
   render() {
     return (
       <div className="app">
-        <BookList books={this.state.books}/>
+        <SearchField />
+        <BookList 
+        books={this.state.books}
+        moveShelf={this.updateShelf}
+        />
       </div>
     )
   }
