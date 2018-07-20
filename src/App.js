@@ -3,6 +3,8 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookList from './BookList'
 import SearchField from './SearchField'
+import { Link } from 'react-router-dom'
+
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +40,9 @@ updateShelf = (book, evt) => {
         books={this.state.books}
         moveShelf={this.updateShelf}
         />
+        <div className="open-search">
+            <Link to="/search">Add a book</Link>
+        </div>
       </div>
     )
   }
