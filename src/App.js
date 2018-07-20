@@ -4,6 +4,7 @@ import './App.css'
 import BookList from './BookList'
 import SearchField from './SearchField'
 import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 
 class App extends Component {
@@ -35,14 +36,22 @@ updateShelf = (book, evt) => {
   render() {
     return (
       <div className="app">
-        <SearchField />
-        <BookList 
-        books={this.state.books}
-        moveShelf={this.updateShelf}
-        />
-        <div className="open-search">
-            <Link to="/search">Add a book</Link>
-        </div>
+        <Route path="/search" render={ () => (
+          <SearchField />
+        )}/>
+
+        <Route exact path="/" render={() => (
+            <BookList 
+              books={this.state.books}
+              moveShelf={this.updateShelf}
+            />
+            )}/>
+              <Link 
+              className="open-search"
+              to="/search"
+              >
+              </Link>
+
       </div>
     )
   }
@@ -50,3 +59,5 @@ updateShelf = (book, evt) => {
 
 
 export default App
+
+
