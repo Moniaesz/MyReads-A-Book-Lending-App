@@ -5,7 +5,7 @@ class BookList extends Component {
 
     render() {
         const books = this.props.books
-        const updateShelf = this.props.moveShelf
+        const updateShelf = this.props.updateShelf
 
         return (
             <div className="list-books">
@@ -18,19 +18,19 @@ class BookList extends Component {
                         title="Currently Reading" 
                         books={books.filter((book) => (book.shelf === "currentlyReading"))}
                         shelf="currentlyReading"
-                        moveShelf={updateShelf}
+                        updateShelf={updateShelf}
                         />
                         <BookShelf 
                         title="Want to Read" 
                         books={books.filter((book) => (book.shelf === "wantToRead"))}
                         shelf="wantToRead"
-                        moveShelf={updateShelf}
+                        updateShelf={updateShelf}
                         />
                         <BookShelf 
                         title="Read" 
                         books={books.filter((book) => (book.shelf === "read"))}
                         shelf="read"
-                        moveShelf={updateShelf}
+                        updateShelf={updateShelf}
                         />
                     </div>
                 </div>

@@ -34,24 +34,27 @@ updateShelf = (book, evt) => {
 }
 
   render() {
-    return (
-      <div className="app">
-        <Route path="/search" render={ () => (
-          <SearchField />
+      return (
+        <div className="app">
+          <Route path="/search" render={ () => (
+            <SearchField 
+              books={this.state.books}
+              updateShelf={this.updateShelf}
+            />
         )}/>
 
-        <Route exact path="/" render={() => (
+          <Route exact path="/" render={() => (
             <BookList 
               books={this.state.books}
-              moveShelf={this.updateShelf}
+              updateShelf={this.updateShelf}
             />
-            )}/>
-              <Link 
-              className="open-search"
-              to="/search"
-              >
-              </Link>
-
+            )}
+          />
+          <Link 
+          className="open-search"
+          to="/search"
+          >
+          </Link>
       </div>
     )
   }

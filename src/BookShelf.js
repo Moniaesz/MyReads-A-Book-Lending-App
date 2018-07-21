@@ -4,7 +4,7 @@ import Book from './Book'
 class BookShelf extends Component {
     render() {
         const books = this.props.books
-        const updateShelf = this.props.moveShelf
+        const updateShelf = this.props.updateShelf
 
         return (
             <div className='bookshelf'>
