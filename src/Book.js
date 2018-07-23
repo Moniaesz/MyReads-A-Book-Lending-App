@@ -8,6 +8,9 @@ class Book extends Component {
 
         const book = this.props.book
         const updateShelf = this.props.updateShelf
+        let displaySmallThumbnail = book.imageLinks 
+        ? book.imageLinks.smallThumbnail
+        : '';
 
         return (
             <li>
@@ -18,7 +21,7 @@ class Book extends Component {
                          style={{ 
                             width: 128, 
                             height: 188, 
-                            backgroundImage: `url("${book.imageLinks.smallThumbnail}")`
+                            backgroundImage: `url("${displaySmallThumbnail}")`
                         }}>
                         </div>
                         <div className="book-shelf-changer">
