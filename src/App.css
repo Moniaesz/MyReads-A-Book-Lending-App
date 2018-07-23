@@ -140,6 +140,10 @@ body, .app {
   align-items: flex-end;
 }
 
+.bookshelf:last-child {
+  background-color: orange;
+}
+
 .book-shelf-changer {
   position: absolute;
   right: 0;

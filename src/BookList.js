@@ -13,7 +13,7 @@ class BookList extends Component {
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    <div>
+                    <div className="allshelves">
                         <BookShelf 
                         title="Currently Reading" 
                         books={books.filter((book) => (book.shelf === "currentlyReading"))}
@@ -30,6 +30,12 @@ class BookList extends Component {
                         title="Read" 
                         books={books.filter((book) => (book.shelf === "read"))}
                         shelf="read"
+                        updateShelf={updateShelf}
+                        />
+                        <BookShelf 
+                        title="None" 
+                        books={books.filter((book) => (book.shelf === "none"))}
+                        shelf="none"
                         updateShelf={updateShelf}
                         />
                     </div>
