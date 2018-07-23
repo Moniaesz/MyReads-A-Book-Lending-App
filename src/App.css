@@ -141,7 +141,7 @@ body, .app {
 }
 
 .bookshelf:last-child {
-  background-color: orange;
+  display: none;
 }
 
 .book-shelf-changer {
