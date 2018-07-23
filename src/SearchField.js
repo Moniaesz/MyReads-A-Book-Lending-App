@@ -24,6 +24,10 @@ class SearchField extends Component {
         this.setState({query})
         if (query) {
             BooksAPI.search(query).then((response) => {
+                if (this.state.books.error) {
+                    this.setState({books:[]
+                })
+                }
                 response.length > 0 
                 ? this.setState({books:response}) 
                 : this.setState({books:[]})
