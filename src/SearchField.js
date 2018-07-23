@@ -1,45 +1,40 @@
 import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
 import Book from './Book'
 
 
 class SearchField extends Component {
 
-    static propTypes = {
-        books: PropTypes.array.isRequired,
-        updateShelf: PropTypes.func.isRequired 
-    }
 
     state = {
         query: '',
-        books: []
+        searchedBooks: []
     }
 
-    filterBooks = (evt) => {
-        const query = evt.target.value
+    filterBooks = (event) => {
+        const query = event.target.value
         this.setState({query})
         if (query) {
             BooksAPI.search(query).then((response) => {
-                if (this.state.books.error) {
-                    this.setState({books:[]
-                })
+                if (this.state.searchedBooks.error) {
+                    this.setState({searchedBooks:[]})
                 }
                 response.length > 0 
-                ? this.setState({books:response}) 
-                : this.setState({books:[]})
+                ? this.setState({searchedBooks:response}) 
+                : this.setState({searchedBooks:[]})
             })
-        } else { this.setState({books:[]
+        } else { this.setState({searchedBooks:[]
             })
         }
     }
 
+
+
+
     render() {
 
-        const { books, updateShelf} = this.props
+        const { book, books, updateShelf} = this.props
 
         return (
             <div>
@@ -57,14 +52,20 @@ class SearchField extends Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            {this.state.books.map((book) => (
-                                <Book 
-                                    books={books}
-                                    book={book}
-                                    key={book.id}
-                                    updateShelf={updateShelf}
-                                />
-                            ))}
+                            {this.state.searchedBooks.map(book => {
+                                let shelf = "none";
+                                return (
+                                    <li key={book.id}>
+                                        <Book 
+                                            books={this.searchedBooks}
+                                            book={book}
+                                            key={book.id}
+                                            updateShelf={updateShelf}
+                                            currentshelf={book.shelf}
+                                        />
+                                    </li>
+                                );
+                            })}
                         </ol>
                     </div>
                 </div>
