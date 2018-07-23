@@ -30,11 +30,11 @@ class SearchField extends Component {
     }
 
 
-
-
     render() {
 
-        const { book, books, updateShelf} = this.props
+        const book = this.props.book
+        const books = this.props.books
+        const updateShelf = this.props.updateShelf
 
         return (
             <div>
@@ -52,16 +52,22 @@ class SearchField extends Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            {this.state.searchedBooks.map(book => {
+                            {this.state.searchedBooks.map(searchBook => {
                                 let shelf = "none";
+
+                                    this.props.books.map(book => (
+                                        book.id === searchBook.id
+                                        ? shelf = book.shelf
+                                        : ''
+                                    ));
                                 return (
-                                    <li key={book.id}>
+                                    <li key={searchBook.id}>
                                         <Book 
                                             books={this.searchedBooks}
-                                            book={book}
-                                            key={book.id}
+                                            book={searchBook}
+                                            key={searchBook.id}
                                             updateShelf={updateShelf}
-                                            currentshelf={book.shelf}
+                                            currentshelf={searchBook.shelf}
                                         />
                                     </li>
                                 );

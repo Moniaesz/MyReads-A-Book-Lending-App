@@ -18,12 +18,13 @@ class App extends Component {
 componentDidMount() {
   BooksAPI.getAll().then((books) => {
     this.setState({books: books})
+    console.log(books)
   })
 }
 
-updateShelf = (book, evt) => {
-  BooksAPI.update(book, evt).then(() => {
-    book.shelf = evt
+updateShelf = (book, event) => {
+  BooksAPI.update(book, event).then(() => {
+    book.shelf = event
     const currentBooks = this.state.books.filter ( b => b.id !== book.id)
     console.log(currentBooks);
     currentBooks.push(book)
@@ -37,7 +38,8 @@ updateShelf = (book, evt) => {
       return (
         <div className="app">
           <Route path="/search" render={ () => (
-            <SearchField 
+            <SearchField
+              book={this.book}
               books={this.state.books}
               updateShelf={this.updateShelf}
             />
